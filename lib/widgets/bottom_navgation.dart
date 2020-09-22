@@ -1,12 +1,11 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/screenutil.dart';
-import 'package:fluttergoshak/screens/homepage.dart';
-import 'package:fluttergoshak/screens/mall_page.dart';
 
 class CustomBottomNavigation extends StatefulWidget {
 
   final int pageIndex;
-  CustomBottomNavigation({this.pageIndex});
+  final Function changePage;
+  CustomBottomNavigation({this.pageIndex,this.changePage});
 
   @override
   _CustomBottomNavigationState createState() => _CustomBottomNavigationState();
@@ -31,21 +30,21 @@ class _CustomBottomNavigationState extends State<CustomBottomNavigation> {
       child: FittedBox(
         child: selectedPage == false ? Column(
           children: [
-            Icon(iconData,color: Colors.black54,size: 25,),
+            Icon(iconData,color: Colors.black54,size: ScreenUtil().setSp(75),),
             Text(labelText,
               style: TextStyle(
               color: Colors.black54,
-              fontSize: ScreenUtil().setSp(25),
+              fontSize: ScreenUtil().setSp(45),
             ),
             )
           ],
         ):Column(
           children: [
-            Icon(iconData,color: Colors.pink,size: 25,),
+            Icon(iconData,color: Colors.pink,size: ScreenUtil().setSp(75),),
             Text(labelText,
               style: TextStyle(
                 color: Colors.pink,
-                fontSize: ScreenUtil().setSp(25),
+                fontSize: ScreenUtil().setSp(45),
               ),
             )
           ],
@@ -56,30 +55,31 @@ class _CustomBottomNavigationState extends State<CustomBottomNavigation> {
 
   checkForSelection(int index)
   {
-    if(index == 1)
+    if(index == 0)
       {
         isHomeSelected = true;
         isMallSelected = false;
         isOrderSelected = false;
         isPersonalSelected = false;
-        Navigator.of(context).push(MaterialPageRoute(builder: (ctx)=> HomePage()));
+        widget.changePage(index);
       }
-    if(index == 2)
+    if(index == 1)
     {
       isHomeSelected = false;
       isMallSelected = true;
       isOrderSelected = false;
       isPersonalSelected = false;
-      Navigator.of(context).push(MaterialPageRoute(builder: (ctx)=> MallPage()));
+      widget.changePage(index);
+
     }
-    if(index == 3)
+    if(index == 2)
     {
       isHomeSelected = false;
       isMallSelected = false;
       isOrderSelected = true;
       isPersonalSelected = false;
     }
-    if(index == 4)
+    if(index == 3)
     {
       isHomeSelected = false;
       isMallSelected = false;
@@ -96,7 +96,7 @@ class _CustomBottomNavigationState extends State<CustomBottomNavigation> {
         decoration: BoxDecoration(
           color: Colors.white,
           border: Border(
-            top: BorderSide(color: Colors.pink,width: 2,style: BorderStyle.solid),
+            top: BorderSide(color: Colors.pink,width: 1,style: BorderStyle.solid),
           )
         ),
       child: Padding(
@@ -104,10 +104,10 @@ class _CustomBottomNavigationState extends State<CustomBottomNavigation> {
         child: Row(
           mainAxisAlignment: MainAxisAlignment.spaceAround,
           children: [
-            buildNavigationTiles(Icons.shopping_cart, 'GoSwak',1,isHomeSelected),
-            buildNavigationTiles(Icons.local_mall, 'Mall',2,isMallSelected),
-            buildNavigationTiles(Icons.assignment, 'Orders',3,isOrderSelected),
-            buildNavigationTiles(Icons.person, 'Personal',4,isPersonalSelected)
+            buildNavigationTiles(Icons.home, 'GoSwak',0,isHomeSelected),
+            buildNavigationTiles(Icons.local_mall, 'Mall',1,isMallSelected),
+            buildNavigationTiles(Icons.assignment, 'Orders',2,isOrderSelected),
+            buildNavigationTiles(Icons.person, 'Personal',3,isPersonalSelected)
           ],
         ),
       ),

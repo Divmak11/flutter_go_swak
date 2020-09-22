@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:fluttergoshak/screens/tab_screen.dart';
 
 import 'screens/homepage.dart';
 
@@ -16,7 +17,7 @@ class MyApp extends StatelessWidget {
         primarySwatch: Colors.blue,
         visualDensity: VisualDensity.adaptivePlatformDensity,
       ),
-      home: HomePage(),
+      home: TabScreen(),
     );
   }
 }

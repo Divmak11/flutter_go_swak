@@ -19,4 +19,17 @@ class Coupon {
 
 class Product{
 
+  String productTitle;
+  String imagePath;
+  String amount;
+  String soldUnits;
+  String id;
+
+  Product({
+    this.id,
+    this.productTitle,
+    this.imagePath,
+    this.soldUnits,
+    this.amount
+});
 }
